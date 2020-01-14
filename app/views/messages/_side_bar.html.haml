@@ -1,14 +1,14 @@
 .SideBar
   .SideBar__info
     .SideBar__info__items
-      %p.SideBar__info__items__name
-        name
+      .SideBar__info__items__name
+        =@user.name
       %ul.SideBar__info__items__icons
         %li.icon-edit
         = link_to("#")  do
           =icon("fas" , "edit")
         %li.icon-cog
-        = link_to("#") do
+        = link_to edit_user_path(current_user) do
           =icon("fas" , "cog")
   
   .SideBar__groups
