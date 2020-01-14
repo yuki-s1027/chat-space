@@ -1,0 +1,19 @@
+.SideBar
+  .SideBar__info
+    .SideBar__info__items
+      %p.SideBar__info__items__name
+        name
+      %ul.SideBar__info__items__icons
+        %li.icon-edit
+        = link_to("#")  do
+          =icon("fas" , "edit")
+        %li.icon-cog
+        = link_to("#") do
+          =icon("fas" , "cog")
+  
+  .SideBar__groups
+    .SideBar__groups__list
+      %h3.group-name
+        group-name
+      %p.group-message
+        メッセージがまだありません

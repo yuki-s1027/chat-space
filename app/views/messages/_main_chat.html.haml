@@ -1,0 +1,37 @@
+.ChatMain
+
+  .ChatMain__info
+    .ChatMain__info__left
+      .group__name
+        group-name
+      .group__members
+        menbers:cewew,ewcewcwe
+    .ChatMain__info__edit
+      = link_to "edit" , "#"
+
+  .ChatMain__messages
+    .ChatMain__messages__list
+      .message__info
+        .name
+          name
+        .day
+          2019/12/21(wed)13:13:21
+      .message__text
+        texttexttexttexttexttext
+      .message__info
+        .name
+          name
+        .day
+          2019/12/21(wed)13:13:21
+      .message__text
+        texttexttexttexttexttext
+
+
+  .ChatMain__create
+    %form.ChatMain__create__form
+      .ChatMain__create__form__input-box
+        %input{type:"text",class:"input-box__text",placeholder:"type a message"}
+        %label{class: "input-box__btn"}
+          =icon("fas","image")
+          %input{type:"file" ,class:"input-box__image_file"}
+      %input{type:"submit",value: "Send",class: "ChatMain__create__form__submit-btn"}
