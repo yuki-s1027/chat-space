@@ -40,19 +40,25 @@ $mainWhiteColor:#ffffff;
       }
     }
 
-    &__groups {
+    &__groups__list {
       height: calc(100% - 100px);
       background-color: #2f3e51;
-      &__list{
+      color: $mainWhiteColor;
+      .group {
         padding: 20px 20px;
-        .group-name {
-          font-size: 15px;
-          padding-bottom: 5px;
-        }
-        .group-message{
-          font-size: 11px;
-          padding-bottom: 40px;
-        }
+        color: $mainWhiteColor;
+        a {
+          text-decoration: none;
+          color: $mainWhiteColor;
+          .group-name {
+            font-size: 15px;
+            padding-bottom: 5px;
+          }
+          .group-message{
+            font-size: 11px;
+            padding-bottom: 40px;
+          }
+        }  
       }
     }
   }

@@ -3,11 +3,11 @@
   .ChatMain__info
     .ChatMain__info__left
       .group__name
-        group-name
+        =@user.name
       .group__members
         menbers:cewew,ewcewcwe
     .ChatMain__info__edit
-      = link_to "edit" , "#"
+      = link_to "edit" , "/groups/:id/edit"
 
   .ChatMain__messages
     .ChatMain__messages__list

@@ -5,15 +5,17 @@
         =@user.name
       %ul.SideBar__info__items__icons
         %li.icon-edit
-        = link_to("#")  do
+        = link_to new_group_path  do
           =icon("fas" , "edit")
         %li.icon-cog
         = link_to edit_user_path(current_user) do
           =icon("fas" , "cog")
   
-  .SideBar__groups
-    .SideBar__groups__list
-      %h3.group-name
-        group-name
-      %p.group-message
-        メッセージがまだありません
+  .SideBar__groups__list
+    - current_user.groups.each do |group|
+      .group
+        = link_to '#' do
+          .group-name
+            = group.name
+          .group-message
+            メッセージがまだありません
