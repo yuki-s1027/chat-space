@@ -2,7 +2,7 @@
   .SideBar__info
     .SideBar__info__items
       .SideBar__info__items__name
-        =@user.name
+        =current_user.name
       %ul.SideBar__info__items__icons
         %li.icon-edit
         = link_to new_group_path  do
@@ -14,8 +14,8 @@
   .SideBar__groups__list
     - current_user.groups.each do |group|
       .group
-        = link_to '#' do
+        = link_to group_messages_path(group) do
           .group-name
             = group.name
           .group-message
-            メッセージがまだありません
+            = group.show_last_message

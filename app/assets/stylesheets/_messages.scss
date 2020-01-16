@@ -123,39 +123,46 @@ $mainWhiteColor:#ffffff;
           color: #434A54;
           font-size: 14px;
           padding-bottom: 46px;
+          .lower-message__image {
+            height: 100px;
+            padding-top: 5px;
+          }
         }
     }
   }
 
     &__create {
       height: 90px;
+      width: 100%;
       background-color: #d2d2d2;
-      &__form {
-      display: flex;
-      justify-content: space-between;
-      padding:20px 40px;
-        &__input-box{
-          width: 100%;
+      .form {
+        width: 100%;
+        padding:20px 40px;
+        .new_message{
           display: flex;
+          justify-content: space-between;
+        }
+        .form__message {
+          display: block;
+          width: 100%;
+          height: 50px;
+          line-height: 50px;
+          padding: 0 50px 0 10px;
+        }
+        .form__mask {
           position: relative;
-            .input-box__text{
-            height: 50px;
-            width: 100%;
-            line-height: 50px;
-            padding: 0 50px 0 10px;
-            }
-            .input-box__btn{
+          .form__mask__image{
             position: absolute;
             right:10px;
             top: 13px;
             cursor: pointer;
             font-size: 25px;
+            .hidden {
+              display: none;
             }
-            .input-box__image_file{
-            display: none;
-            }
+          }
         }
-        &__submit-btn{
+        .form__submit {
           height: 50px;
           width: 100px;
           background-color: #38aef0;

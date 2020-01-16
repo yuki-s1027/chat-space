@@ -3,35 +3,36 @@
   .ChatMain__info
     .ChatMain__info__left
       .group__name
-        =@user.name
+        =@group.name
       .group__members
-        menbers:cewew,ewcewcwe
+        -if @group.name.present?
+          member:
+          - @group.group_users.each do |group_users|
+            =group_users.user.name
     .ChatMain__info__edit
-      = link_to "edit" , "/groups/:id/edit"
+      = link_to edit_group_path(@group.id) do
+        ="edit"
 
   .ChatMain__messages
     .ChatMain__messages__list
-      .message__info
-        .name
-          name
-        .day
-          2019/12/21(wed)13:13:21
-      .message__text
-        texttexttexttexttexttext
-      .message__info
-        .name
-          name
-        .day
-          2019/12/21(wed)13:13:21
-      .message__text
-        texttexttexttexttexttext
-
+      - @messages.each do |message|
+        .message__info
+          .name
+            =message.user.name
+          .day
+            =message.created_at.strftime("%Y年%m月%d日 %H時%M分")
+        .message__text
+          - if message.text.present?
+            %p.lower-message__text
+              = message.text
+          = image_tag message.image.url, class: 'lower-message__image' if message.image.present?
 
   .ChatMain__create
-    %form.ChatMain__create__form
-      .ChatMain__create__form__input-box
-        %input{type:"text",class:"input-box__text",placeholder:"type a message"}
-        %label{class: "input-box__btn"}
-          =icon("fas","image")
-          %input{type:"file" ,class:"input-box__image_file"}
-      %input{type:"submit",value: "Send",class: "ChatMain__create__form__submit-btn"}
+    .form
+      = form_for [@group, @message] do |f|
+        = f.text_field :text, class: 'form__message', placeholder: 'type a message'
+        .form__mask
+          = f.label :image, class: 'form__mask__image' do
+            = icon('fas', 'image', class: 'icon')
+            = f.file_field :image, class: 'hidden'
+        = f.submit 'Send', class: 'form__submit'
