@@ -103,16 +103,18 @@ $mainWhiteColor:#ffffff;
     &__messages{
       height: calc(100% - 190px);
       background-color: #fafafa;
+      overflow: scroll;
       &__list{
-        width: 230px;
+        width: 90%;
+        height: 100%;
         padding: 35px 0 35px 40px;
         .message__info{
           display: flex;
-          justify-content: space-between;
           padding-bottom: 12px;
           .name {
             color: #333333;
             font-size: 16px;
+            padding-right: 20px;
           }
           .day {
             color: #999999;
