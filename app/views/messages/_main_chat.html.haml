@@ -20,7 +20,7 @@
           .name
             =message.user.name
           .day
-            =message.created_at.strftime("%Y年%m月%d日 %H時%M分")
+            =message.created_at.to_s
         .message__text
           - if message.text.present?
             %p.lower-message__text
