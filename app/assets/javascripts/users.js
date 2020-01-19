@@ -32,12 +32,12 @@ $(function(){
 
   $("#user-search-field").on("keyup", function(e){
     e.preventDefault();
-    var input = $("#user-search-field").val();    //フォームの値を取得して変数に代入する
+    var input = $("#user-search-field").val(); 
     $.ajax({
-      type: "GET",    //HTTPメソッド
-      url: "/users",       //users_controllerの、indexアクションにリクエストの送信先を設定する
+      type: "GET",    
+      url: "/users",  
       dataType: 'json',
-      data: {keyword: input},   //テキストフィールドに入力された文字を設定する
+      data: {keyword: input},   
     })
       .done(function(users) {
         $("#user-search-result").empty();

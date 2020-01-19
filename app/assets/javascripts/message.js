@@ -1,9 +1,34 @@
 $(function(){
 
+  var reloadMessages = function() {
+    last_message_id = $('.message:last').data("message-id");
+    $.ajax({
+      url: "api/messages",
+      type: 'get',
+      dataType: 'json',
+      data: {id: last_message_id}
+    })
+    .done(function(messages) {
+      if (messages.length !== 0) {
+        var insertHTML = '';
+        $.each(messages, function(i, message) {
+          insertHTML += buildHTML(message)
+        });
+        $('.messages').append(insertHTML);
+        $('.ChatMain__messages').animate({ scrollTop: $('.ChatMain__messages')[0].scrollHeight});
+        $("#new_message")[0].reset();
+        $(".form__submit").prop("disabled", false);
+      }
+    })
+    .fail(function() {
+      console.log('error');
+    });
+  };
+
   function buildHTML(message){
-    if (message.image) {
-      var html =  
-        `<div class="message__info">
+    if (message.image && message.text) {
+      var html =  `<div class="message" data-message-id = message.id >
+         <div class="message__info">
             <div class="name">
               ${message.user_name}</div>
             <div class="day">
@@ -16,9 +41,9 @@ $(function(){
           <img src=${message.image} , class='lower-message__image'>
         </div>`
       return html;
-    } else {
-      var html = 
-        `<div class="message__info">
+    } else if(message.text){
+      var html = `<div class="message" data-message-id = message.id  >
+          <div class="message__info">
           <div class="name">
             ${message.user_name}</div>
           <div class="day">
@@ -28,11 +53,26 @@ $(function(){
           <p class="lower-message__text">
             ${message.text}
           </p>
+        </div>
         </div>`
       return html;
-    }
-    return html
-  }
+    } else if (message.image){
+      var html =  `<div class="message" data-message-id = message.id >
+         <div class="message__info">
+            <div class="name">
+              ${message.user_name}</div>
+            <div class="day">
+              ${message.created_at}</div>
+        </div>
+        <div class="message__text">
+          <p class="lower-message__text">
+          </p>
+          <img src=${message.image} , class='lower-message__image'>
+        </div>`
+      return html;
+    };
+    return html;
+  };
 
   $("#new_message").on("submit",function(e){
     e.preventDefault()
@@ -48,7 +88,7 @@ $(function(){
     })
     .done(function(data){
       var html = buildHTML(data);
-      $('.ChatMain__messages__list').append(html);      
+      $('.messages').append(html);      
       $('form')[0].reset();
       $('.ChatMain__messages').animate({ scrollTop: $('.ChatMain__messages')[0].scrollHeight});
       $(".form__submit").prop("disabled", false);
@@ -57,4 +97,7 @@ $(function(){
       alert("エラー")
     })
   })
+  if (document.location.href.match(/\/groups\/\d+\/messages/)) {
+    setInterval(reloadMessages, 7000);
+  }
 });
