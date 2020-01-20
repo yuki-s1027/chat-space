@@ -2,6 +2,7 @@ $(function(){
 
   var reloadMessages = function() {
     last_message_id = $('.message:last').data("message-id");
+    console.log(last_message_id)
     $.ajax({
       url: "api/messages",
       type: 'get',
@@ -9,6 +10,7 @@ $(function(){
       data: {id: last_message_id}
     })
     .done(function(messages) {
+      console.log(messages)
       if (messages.length !== 0) {
         var insertHTML = '';
         $.each(messages, function(i, message) {
@@ -27,7 +29,7 @@ $(function(){
 
   function buildHTML(message){
     if (message.image && message.text) {
-      var html =  `<div class="message" data-message-id = message.id >
+      var html =  `<div class="message" data-message-id = ${message.id} >
          <div class="message__info">
             <div class="name">
               ${message.user_name}</div>
@@ -42,7 +44,7 @@ $(function(){
         </div>`
       return html;
     } else if(message.text){
-      var html = `<div class="message" data-message-id = message.id  >
+      var html = `<div class="message" data-message-id = ${message.id}  >
           <div class="message__info">
           <div class="name">
             ${message.user_name}</div>
@@ -57,7 +59,7 @@ $(function(){
         </div>`
       return html;
     } else if (message.image){
-      var html =  `<div class="message" data-message-id = message.id >
+      var html =  `<div class="message" data-message-id = ${message.id} >
          <div class="message__info">
             <div class="name">
               ${message.user_name}</div>
