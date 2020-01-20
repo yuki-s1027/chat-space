@@ -14,17 +14,18 @@
         ="edit"
 
   .ChatMain__messages
-    .ChatMain__messages__list
+    .messages
       - @messages.each do |message|
-        .message__info
-          .name
-            =message.user.name
-          .day
-            =message.created_at.to_s
-        .message__text
-          - if message.text.present?
-            %p.lower-message__text
-              = message.text
+        .message{data: {message: {id: message.id}}}
+          .message__info
+            .name
+              =message.user.name
+            .day
+              =message.created_at.to_s
+          .message__text
+            - if message.text.present?
+              %p.lower-message__text
+                = message.text
           = image_tag message.image.url, class: 'lower-message__image' if message.image.present?
 
   .ChatMain__create
